@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">
+            <span class="gradient-text">AI Sentiment</span>
+            Analysis Platform
+        </h1>
+        <p class="hero-subtitle">Transform customer feedback into actionable insights with enterprise-grade AI</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('upload') }}" class="btn btn-primary btn-lg">
+                <i class="fas fa-rocket"></i> Start Analysis
+            </a>
+            <a href="#features" class="btn btn-secondary btn-lg">
+                <i class="fas fa-star"></i> View Features
+            </a>
+        </div>
+    </div>
+</div>
+
+<section id="features" class="features">
+    <div class="container">
+        <h2 class="section-title">Powerful Features</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-upload"></i>
+                </div>
+                <h3>Drag & Drop Upload</h3>
+                <p>Upload CSV files with reviews, comments, or feedback instantly</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered Analysis</h3>
+                <p>Advanced ML models trained specifically for sentiment detection</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-chart-pie"></i>
+                </div>
+                <h3>Interactive Dashboard</h3>
+                <p>Real-time charts, KPIs, and insights with Plotly visualization</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-file-download"></i>
+                </div>
+                <h3>Professional Reports</h3>
+                <p>Download PDF reports with complete analysis and recommendations</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}Analyzing - AI Sentiment Dashboard{% endblock %}
+
+{% block content %}
+<div class="loading-page">
+    <div class="loading-content glass">
+        <div class="loading-spinner"></div>
+        <div class="loading-steps">
+            <div class="step active">
+                <i class="fas fa-brain"></i>
+                <span>Training AI Model</span>
+            </div>
+            <div class="step">
+                <i class="fas fa-chart-line"></i>
+                <span>Analyzing Sentiments</span>
+            </div>
+            <div class="step">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Preparing Dashboard</span>
+            </div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+    </div>
+</div>
+<script>
+    const analysisId = '{{ analysis_id }}';
+    setTimeout(() => {
+        window.location.href = `/dashboard/${analysisId}`;
+    }, 4000);
+</script>
+{% endblock %}

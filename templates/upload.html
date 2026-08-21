@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="upload-container">
+    <div class="upload-card glass">
+        <div class="upload-header">
+            <h2><i class="fas fa-cloud-upload-alt"></i> Upload Dataset</h2>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back
+            </a>
+        </div>
+        
+        <div class="upload-area" id="uploadArea">
+            <div class="upload-icon">
+                <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            {% endblock %}

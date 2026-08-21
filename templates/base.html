@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}AI Sentiment Analysis Dashboard{% endblock %}</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-brain"></i>
+                <span>SentimentAI</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="{{ url_for('index') }}" class="nav-link"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="{{ url_for('upload') }}" class="nav-link"><i class="fas fa-upload"></i> Upload</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-chart-bar"></i> Dashboard</a></li>
+                <li><a href="#" class="nav-link"><i class="fas fa-info-circle"></i> About</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    {% block content %}{% endblock %}
+
+    <div class="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+</body>
+</html>

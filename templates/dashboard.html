@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - AI Sentiment Analysis{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar glass">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-chart-bar"></i> Dashboard</h3>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#overview" class="nav-item active">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Overview</span>
+            </a>
+            <a href="#charts" class="nav-item">
+                <i class="fas fa-chart-pie"></i>
+                <span>Charts</span>
+            </a>
+            <a href="#predict" class="nav-item">
+                <i class="fas fa-magic"></i>
+                <span>Predict</span>
+            </a>
+            <a href="#suggestions" class="nav-item">
+                <i class="fas fa-lightbulb"></i>
+                <span>Suggestions</span>
+            </a>
+            <div class="sidebar-footer">
+                <a href="{{ url_for('download_report', analysis_id=analysis_id) }}" class="btn btn-primary">
+                    <i class="fas fa-download"></i> Download Report
+                </a>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- KPI Cards -->
+        <section id="overview" class="section">
+            <div class="container">
+                <h2 class="section-title"><i class="fas fa-tachometer-alt"></i> Overview</h2>
+                <div class="kpi-grid">
+                    <div class="kpi-card positive">
+                        <div class="kpi-icon">
+                            <i class="fas fa-thumbs-up"></i>
+                        </div>
+                        <div class="kpi-value" data-target="{{ total_reviews }}">{{ total_reviews.toLocaleString() }}</div>
+                        <div class="kpi-label">Total Reviews</div>
+                    </div>
+                    <div class="kpi-card positive">
+                        <div class="kpi-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="kpi-value" data-target="{{ "%.1f"|format(positive_pct) }}">0</div>
+                        <div class="kpi-label">Positive %</div>
+                    </div>
+                    <div class="kpi-card negative">
+                        <div class="kpi-icon">
+                            <i class="fas fa-frown"></i>
+                        </div>
+                        <div class="kpi-value" data-target="{{ "%.1f"|format(negative_pct) }}">0</div>
+                        <div class="kpi-label">Negative %</div>
+                    </div>
+                    <div class="kpi-card neutral">
+                        <div class="kpi-icon">
+                            <i class="fas fa-meh"></i>
+                        </div>
+                        <div class="kpi-value" data-target="{{ "%.1f"|format(neutral_pct) }}">0</div>
+                        <div class="kpi-label">Neutral %</div>
+                    </div>
+                    <div class="kpi-card accuracy">
+                        <div class="kpi-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="kpi-value" data-target="{{ "%.1f"|format(accuracy) }}">0</div>
+                        <div class="kpi-label">Accuracy</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section id="charts" class="section">
+            <div class="container">
+                <h2 class="section-title"><i class="fas fa-chart-pie"></i> Analytics</h2>
+                <div class="charts-grid">
+                    <div class="chart-card glass">
+                        <h3>Sentiment Distribution</h3>
+                        <div id="pieChart"></div>
+                    </div>
+                    <div class="chart-card glass">
+                        <h3>Confusion Matrix</h3>
+                        <div id="confusionMatrix"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Predict Section -->
+        <section id="predict" class="section">
+            <div class="container">
+                <h2 class="section-title"><i class="fas fa-magic"></i> Predict Sentiment</h2>
+                <div class="predict-container">
+                    <div class="predict-input glass">
+                        <textarea id="predictText" placeholder="Enter text for sentiment analysis..."></textarea>
+                        <div class="predict-buttons">
+                            <button class="btn btn-primary" id="predictBtn">
+                                <i class="fas fa-magic"></i> Predict
+                            </button>
+                            <button class="btn btn-secondary" id="clearBtn">
+                                <i class="fas fa-trash"></i> Clear
+                            </button>
+                        </div>
+                    </div>
+                    <div class="predict-output glass" id="predictOutput" style="display: none;">
+                        <div class="prediction-result">
+                            <div class="sentiment-display" id="sentimentDisplay"></div>
+                            <div class="confidence-bar" id="confidenceBar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    const analysisId = '{{ analysis_id }}';
+    window.analysisData = {
+        sentiment_counts: {{ sentiment_counts|tojson }},
+        confusion_matrix: {{ confusion_matrix|tojson }},
+        total_reviews: {{ total_reviews }},
+        positive_pct: {{ positive_pct }},
+        negative_pct: {{ negative_pct }},
+        neutral_pct: {{ neutral_pct }},
+        accuracy: {{ accuracy }}
+    };
+</script>
+{% endblock %}
